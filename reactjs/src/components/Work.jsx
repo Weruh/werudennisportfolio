@@ -2,25 +2,25 @@ export default function Work() {
     const work = [
         {
             name: 'Tajiluxuryevents',
-            icon: './assets/work-1.png',
+            icon: './assets/work-1.webp',
             description: 'Event Planning Company',
             link: 'https://www.tajiluxuryevents.com/',
         },
         {
             name: 'Niwangu',
-            icon: './assets/work-2.png',
+            icon: './assets/work-2.webp',
             description: 'a dating site',
             link: 'https://niwangu.com/',
         },
         {
             name: 'lumimarbrand',
-            icon: './assets/work-3.png',
+            icon: './assets/work-3.webp',
             description: 'Eccormerce clothing shop',
             link: 'https://clothing.lumimarbrand.com/',
         },
         {
             name: 'salimcyrus',
-            icon: './assets/work-4.png',
+            icon: './assets/work-4.webp',
             description: 'Personal Brand Website',
             link: 'https://salimcyrus.com/',
         }
@@ -40,9 +40,17 @@ export default function Work() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`Open ${work.name} website`}
-                        className="aspect-square bg-no-repeat bg-cover bg-center rounded-lg relative cursor-pointer group"
-                        style={{ backgroundImage: `url(${work.icon})` }}
+                        className="block aspect-square rounded-lg relative cursor-pointer group overflow-hidden"
                     >
+                        <img
+                            src={work.icon}
+                            alt=""
+                            loading="lazy"
+                            decoding="async"
+                            width="640"
+                            height="960"
+                            className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                        />
                         <div className="bg-white w-10/12 rounded-md absolute bottom-5 left-1/2 -translate-x-1/2 py-3 px-5 flex items-center justify-between duration-500 group-hover:bottom-7">
                             <div>
                                 <h2 className="font-semibold">{work.name}</h2>

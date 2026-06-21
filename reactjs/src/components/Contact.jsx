@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 export default function Contact() {
     const [result, setResult] = useState("");
+    const contactBackground = { '--contact-bg': "url('./assets/footer-bg-color.png')" };
     const onSubmit = async (event) => {
         event.preventDefault();
         const hCaptcha = event.target.querySelector('textarea[name=h-captcha-response]').value;
@@ -33,6 +34,8 @@ export default function Contact() {
     };
 
     function CaptchaLoader() {
+        if (document.getElementById('hcaptcha-script')) return;
+
         const captchadiv = document.querySelectorAll('[data-captcha="true"]');
         if (captchadiv.length) {
             let lang = null;
@@ -62,6 +65,7 @@ export default function Contact() {
             }
 
             var script = document.createElement("script");
+            script.id = "hcaptcha-script";
             script.type = "text/javascript";
             script.async = true;
             script.defer = true;
@@ -71,10 +75,30 @@ export default function Contact() {
     }
 
     useEffect(() => {
-        CaptchaLoader();
+        const contactSection = document.getElementById('contact');
+
+        if (!contactSection || !('IntersectionObserver' in window)) {
+            CaptchaLoader();
+            return;
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            if (entries.some((entry) => entry.isIntersecting)) {
+                CaptchaLoader();
+                observer.disconnect();
+            }
+        }, { rootMargin: '300px' });
+
+        observer.observe(contactSection);
+
+        return () => observer.disconnect();
     }, []);
     return (
-        <div id="contact" className="w-full px-[12%] py-10 scroll-mt-20 bg-[url('./assets/footer-bg-color.png')] bg-no-repeat bg-[length:90%_auto] bg-center dark:bg-none">
+        <div
+            id="contact"
+            style={contactBackground}
+            className="w-full px-[12%] py-10 scroll-mt-20 bg-[image:var(--contact-bg)] bg-no-repeat bg-[length:90%_auto] bg-center dark:bg-none"
+        >
 
             <h4 className="text-center mb-2 text-lg font-Ovo">Connect with me</h4>
             <h2 className="text-center text-5xl font-Ovo">Get in touch</h2>
