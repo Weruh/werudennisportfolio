@@ -13,12 +13,12 @@ export default function Navbar() {
     }
     const toggleTheme = () => {
 
-        document.documentElement.classList.toggle('dark');
+        document.documentElement.classList.toggle('light');
 
-        if (document.documentElement.classList.contains('dark')) {
-            localStorage.theme = 'dark';
-        } else {
+        if (document.documentElement.classList.contains('light')) {
             localStorage.theme = 'light';
+        } else {
+            localStorage.theme = 'dark';
         }
     }
 
